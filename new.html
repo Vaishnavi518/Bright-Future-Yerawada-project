@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bright Future India</title>
+
+  <style>
+    /* Reset & Typography */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      background-color: #f4f7f9;
+      color: #333;
+      scroll-behavior: smooth;
+    }
+    .video-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+    filter: brightness(0.45); /* Optional: darken video for text visibility */
+}
+
+    a {
+      color: #2e7d32;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* Header */
+    header {
+      position: relative;
+      height: 500px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #fff;
+    }
+
+    header video {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.6) blur(2px);
+      z-index: 0;
+      top: 0;
+      left: 0;
+    }
+
+    header::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom,
+          rgba(0, 0, 0, 0.4),
+          rgba(0, 0, 0, 0.7));
+      z-index: 0;
+    }
+
+    header .content {
+      z-index: 1;
+      padding: 20px;
+      max-width: 900px;
+      animation: fadeInDown 1.5s ease;
+    }
+
+    header h1 {
+      font-size: 3.2em;
+      letter-spacing: 2px;
+      text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.6);
+    }
+
+    /* Navigation */
+    nav {
+      background: #2e7d32;
+      padding: 14px 0;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    nav a {
+      color: white;
+      font-weight: 600;
+      margin: 0 18px;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      color: #ffeb3b;
+    }
+
+    main {
+      max-width: 1300px;
+      margin: 40px auto;
+      padding: 0 25px;
+    }
+
+    section {
+  background: rgba(255, 255, 255, 0.08); /* transparent glass */
+  padding: 40px 45px;
+  border-radius: 12px;
+  backdrop-filter: blur(10px) saturate(160%);
+  -webkit-backdrop-filter: blur(10px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  margin-bottom: 60px;
+  color: #ffffff;
+}
+
+section h2 {
+  border-left: 5px solid #43a047;
+  padding-left: 15px;
+  margin-bottom: 25px;
+  font-size: 2em;
+  color: #a5e6a7; /* light green for contrast */
+}
+
+    /* Founder */
+    .founder-content {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      align-items: center;
+      margin-top: 20px;
+    }
+    .founder-content img {
+      width: 280px;
+      height: 280px;
+      border-radius: 12px;
+      object-fit: cover;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+    }
+    .founder-content div {
+      flex: 1 1 600px;
+    }
+
+
+    /* Placement Growth Heading Fixed */
+    .placement-title {
+      font-size: 2em;
+      color: #a5e6a7;
+      border-left: 5px solid #43a047;
+      padding-left: 15px;
+      margin-bottom: 25px;
+      margin-top: 20px;
+    }
+
+    /* Buttons (Old Formatting) */
+    .btn {
+      display: inline-block;
+      padding: 12px 25px;
+      background: #4caf50;
+      color: #fff;
+      text-decoration: none;
+      font-size: 18px;
+      font-weight: 600;
+      border-radius: 8px;
+      margin: 10px;
+      transition: 0.3s;
+    }
+
+    .btn:nth-child(2) {
+      background: #4caf50;
+    }
+
+    .btn:nth-child(3) {
+      background: #4caf50;
+    }
+
+    .btn:nth-child(4) {
+      background: #4caf50;
+    }
+
+    .btn:hover {
+      opacity: 0.85;
+    }
+
+    /* Industrial Visits */
+    .industrial-visits {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+    }
+
+    .visit-card {
+      background: #6e6767;
+      padding: 20px;
+      text-align: center;
+      border-radius: 10px;
+      transition: 0.3s;
+    }
+
+    .visit-card img {
+      width: 100%;
+      height: 200px;
+      border-radius: 10px;
+      object-fit: cover;
+      margin-bottom: 15px;
+    }
+
+    .visit-card:hover {
+      transform: translateY(-8px);
+    }
+
+    /* Success Stories – No Images */
+    .success-list p {
+      padding: 10px 0;
+      font-size: 1.1em;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    /* Extra Activities */
+    .activities-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+    }
+
+    .activity-card {
+      background: #5a5656;
+      border-radius: 10px;
+      text-align: center;
+      padding: 20px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    }
+
+    .activity-card img {
+      width: 100%;
+      height: 200px;
+      border-radius: 8px;
+      object-fit: cover;
+      margin-bottom: 15px;
+    }
+
+    /* Teachers Layout */
+    .teachers-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .teachers-row {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .teacher-card {
+      background: #928d8d;
+      padding: 15px;
+      border-radius: 10px;
+      text-align: center;
+      width: 220px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+    }
+
+    .teacher-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+
+    /* Partner Companies */
+    #partners ul li {
+      background: #e8f5e9;
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-size: 18px;
+      font-weight: 600;
+      color: #2e7d32;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+      transition: 0.3s;
+    }
+
+    #partners ul li:hover {
+      transform: translateY(-5px);
+      background: #c8e6c9;
+    }
+
+    /* Footer */
+    footer {
+      background: #263238;
+      padding: 40px 20px;
+      color: white;
+      text-align: center;
+    }
+
+    footer iframe {
+      width: 100%;
+      max-width: 600px;
+      height: 300px;
+      border-radius: 10px;
+      border: none;
+      margin-top: 20px;
+    }
+
+    .back-to-top {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      background: #43a047;
+      color: white;
+      padding: 12px 16px;
+      border-radius: 50%;
+      font-size: 1.4em;
+    }
+    <style>
+    :root{
+      --green-bg: #9cd03a;
+      --green-panel: rgba(255,255,255,0.18);
+      --blue-btn: #0b87a8;
+      --input-bg: #ffffff;
+      --footer-bg: #000;
+      --muted: #d0d0d0;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      margin:0;
+      color:#111;
+      line-height:1.45;
+      background:#fff;
+    }
+
+    /* --- Newsletter section --- */
+    .newsletter {
+      background: var(--green-bg);
+      padding: 60px 20px 40px;
+      text-align: center;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      flex-direction:column;
+    }
+
+    .newsletter .container {
+      width: min(1100px, 96%);
+    }
+
+    .newsletter h2{
+      font-size: clamp(24px, 3.6vw, 40px);
+      margin-bottom: 26px;
+      font-weight:700;
+      color:#f3e5e5;
+      letter-spacing: -0.02em;
+    }
+
+    .subscribe-panel{
+      background: var(--green-panel);
+      border-radius: 10px;
+      padding: 14px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      max-width: 900px;
+      margin: 0 auto;
+      box-shadow: 0 2px 0 rgba(252, 243, 243, 0.03);
+    }
+
+    .subscribe-left{
+      display:flex;
+      gap:12px;
+      flex:1;
+      align-items:center;
+    }
+
+    .subscribe-left input[type="text"],
+    .subscribe-left input[type="email"]{
+      padding: 12px 14px;
+      border-radius: 6px;
+      border: none;
+      min-width: 200px;
+      width: 100%;
+      background: var(--input-bg);
+      outline: none;
+      box-shadow: inset 0 1px 0 rgba(241, 237, 237, 0.979);
+      font-size: 14px;
+    }
+
+    .subscribe-btn {
+    background-color: #51f675; /* Yellow color */
+    color: #000; /* Black text for good contrast */
+    padding: 12px 25px;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s ease;
+  }
+
+  .subscribe-btn:hover {
+    background-color: #e0a800; /* Slightly darker yellow on hover */
+  }
+
+    .subscribe-btn:hover{ transform: translateY(-1px); }
+
+    /* small screens: stack inputs */
+    @media (max-width:720px){
+      .subscribe-panel{
+        flex-direction:column;
+        align-items:stretch;
+      }
+      .subscribe-left{ flex-direction:column; }
+      .subscribe-btn{ width:100%; }
+    }
+
+    /* --- Footer --- */
+    footer.site-footer{
+      background: var(--footer-bg);
+      color: #fff;
+      padding: 48px 20px;
+    }
+
+    .footer-inner{
+      width: min(1200px, 96%);
+      margin: 0 auto;
+      display:grid;
+      grid-template-columns: 1fr 1fr 1fr 140px;
+      gap: 30px;
+      align-items:start;
+    }
+
+    /* logo & description */
+    .footer-logo {
+      display:flex;
+      gap:14px;
+      align-items:flex-start;
+    }
+    .footer-logo img{
+      width:64px;
+      height:64px;
+      object-fit:contain;
+    }
+    .footer-desc{
+      font-size:14px;
+      color: var(--muted);
+      margin-top:6px;
+      max-width:320px;
+    }
+
+    .footer-col h4{
+      margin:0 0 12px 0;
+      font-size:16px;
+      color:#fff;
+    }
+
+    .footer-links{
+      list-style:none;
+      padding:0;
+      margin:0;
+    }
+    .footer-links li{
+      margin:8px 0;
+    }
+    .footer-links a{
+      color: #0fe750;
+      text-decoration:none;
+      font-size:15px;
+    }
+    .footer-links a:hover{ color: #c41c1c; text-decoration:underline; }
+
+    .socials{
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+      align-items:center;
+    }
+    .socials .icons{
+      display:flex;
+      gap:12px;
+      margin-top:6px;
+    }
+    .socials a{
+      display:inline-flex;
+      width:38px;
+      height:38px;
+      align-items:center;
+      justify-content:center;
+      border-radius:50%;
+      color:#06bd68;
+      text-decoration:none;
+      background: rgba(245, 234, 234, 0.712);
+      font-size:18px;
+    }
+
+    /* bottom copyright row */
+    .copyright{
+      margin-top:28px;
+      border-top: 1px solid rgba(250, 244, 244, 0.76);
+      padding-top:20px;
+      color: #eee1e19c;
+      font-size:13px;
+      text-align:left;
+      width: min(1200px, 96%);
+      margin-left:auto;
+      margin-right:auto;
+    }
+
+    @media (max-width:900px){
+      .footer-inner{ grid-template-columns: 1fr 1fr; }
+      .socials{ align-items:flex-start; }
+    }
+    @media (max-width:520px){
+      .footer-inner{ grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <video autoplay muted loop>
+      <source src="Indian_Girls_Video_Generated.mp4" type="video/mp4" />
+    </video>
+     
+    <div class="content">
+      <img Src="logo.webp" style="width: 400px; alignment-baseline: central;">
+      <h1>Bright Future India</h1>
+      <h2>Yerwada, Pune</h2>
+      <p>“Aspiration to Inspiration” – Empowering youth through education & opportunity.</p>
+    </div>
+  </header>
+
+  <!-- NAVIGATION -->
+  <nav>
+    <a href="#about">About</a>
+    <a href="#founder">Founder</a>
+    <a href="#growth">Placement Growth</a>
+    <a href="#industrial">Industrial Visits</a>
+    <a href="#stories">Feedback</a>
+    <a href="#extra">Extra Activities</a>
+    <a href="#teachers">Team</a>
+    <a href="#partners">Partners</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <main>
+    <!-- BACKGROUND VIDEO -->
+<video autoplay muted loop playsinline class="video-bg">
+    <source src="Professional_Tech_Background_Video_Generated.mp4" type="video/mp4">
+</video>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <h2>About Bright Future India</h2>
+      <p>Bright Future India is a non-profit organization dedicated to empowering underprivileged youth through education, training, and career guidance. We work hand-in-hand with corporate partners to bridge the gap between talent and opportunity.</p>
+    </section>
+
+    <!-- FOUNDER -->
+    <section id="founder">
+      <h2>Our Founder</h2>
+      <div class="founder-content">
+        <img src="palve.png" alt="">
+        <div>
+          <h3>Kishor Palve</h3>
+          <p>
+
+Kishor Palve, born in 1984 in the small village of Udarmal in Maharashtra, grew up with limited role models and a community where most children followed predictable paths. After moving to Mumbai, he too chose his education stream by simply following others. His perspective changed in college when an inspiring Economics professor showed him that work could be meaningful. Motivated to try something new, he briefly ran a vada pav stall, but it was shut down due to lack of a license. This setback strengthened his resolve. A chance meeting with a social worker introduced him to social work, and despite not getting into a reputed institute, he pursued an MSW in Satara. Kishor discovered his passion for guiding adolescents who lacked clarity about their futures. He and his friends began mentoring students and school dropouts, eventually leading to the creation of New Resolution India and its flagship initiative, Bright Future.
+</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PLACEMENT GROWTH -->
+    <section id="growth">
+      <h2 class="placement-title">Placement Growth (July - October)</h2>
+
+      <div style="text-align:center; margin-bottom:20px;">
+        <a href="july.html" class="btn">July</a>
+        <a href="august.html" class="btn">August</a>
+        <a href="september.html" class="btn">September</a>
+        <a href="october.html" class="btn">October</a>
+      </div>
+    </section>
+
+    <!-- INDUSTRIAL VISITS -->
+    <section id="industrial">
+      <h2>Industrial Visits</h2>
+
+      <div class="industrial-visits">
+
+        <div class="visit-card">
+          <img src="WhatsApp Image 2025-11-11 at 11.28.04 AM (2).jpeg" alt="">
+          <h3>Batches Taken</h3>
+          <p>5 new batches trained 100+ aspirant in both technical and soft skills this month.</p>
+        </div>
+
+        <div class="visit-card">
+          <img src="WhatsApp Image 2025-11-11 at 11.28.05 AM.jpeg" alt="">
+          <h3>New Initiatives</h3>
+          <p>Launched community mentorship and awareness programs for holistic development.</p>
+        </div>
+
+        <div class="visit-card">
+          <img src="jpmorgan.jpeg" alt="">
+          <h3>Exposure Visit</h3>
+          <p>Trained and guided the Aspirants By JPMorgan team.</p>
+        </div>
+
+        <div class="visit-card">
+          <img src="Student Success.jpeg" alt="">
+          <h3>Student Success</h3>
+          <p>"Thanks to Bright Future, We learnt how IT firm Works."</p>
+        </div>
+
+        <div class="visit-card">
+          <img src="WhatsApp Image 2025-11-11 at 11.28.03 AM (1).jpeg" alt="">
+          <h3>Mentorship Magic</h3>
+          <p>"The training sessions boosted my confidence and interview performance."</p>
+        </div>
+
+        <div class="visit-card">
+          <img src="WhatsApp Image 2025-11-11 at 11.28.03 AM.jpeg" alt="">
+          <h3>Corporate Support</h3>
+          <p>"Volunteers from JPMorgan inspired our aspirant with real-world advice."</p>
+
+      </div>
+    </section>
+
+    <!-- SUCCESS STORIES (No Images) -->
+    <section id="stories">
+      <h2>Feedback</h2>
+
+      <div class="success-list">
+        <p><strong>⭐ Archana Bhatt</strong> — <a href="Success1.mp4" target="_blank">Watch Video</a></p>
+        <p><strong>⭐ Afiya Farooq</strong> — <a href="Success2.mp4" target="_blank">Watch Video</a></p>
+        <p><strong>⭐ Anjali Londhe</strong> — <a href="Success3.mp4" target="_blank">Watch Video</a></p>
+        <p><strong>⭐ Abhilasha Ranpise</strong> — <a href="Success4.mp4" target="_blank">Watch Video</a></p>
+        <p><strong>⭐ Sandhya Chavan</strong> — <a href="Suceess5.mp4" target="_blank">Watch Video</a></p>
+      </div>
+    </section>
+
+    <!-- EXTRA ACTIVITIES -->
+    <section id="extra">
+      <h2>Extra Activities</h2>
+
+      <div class="activities-grid">
+
+        <div class="activity-card">
+          <img src="poster.jpeg">
+          <h3>Poster Making</h3>
+        </div>
+
+        <div class="activity-card">
+          <img src="gd.jpeg">
+          <h3>Group Discussions</h3>
+        </div>
+
+        <div class="activity-card">
+          <img src="social.jpeg">
+          <h3>Badi Soch-Entrepreneurship</h3>
+        </div>
+
+        <div class="activity-card">
+          <img src="skillsession.jpeg">
+          <h3>Skill Sessions</h3>
+        </div>
+
+        <div class="activity-card">
+          <img src="guest.jpeg">
+          <h3>Guest Sessions on Technology</h3>
+        </div>
+
+        <div class="activity-card">
+          <img src="talentshow.jpeg">
+          <h3>Diwali Celebration</h3>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- HOW WE CONNECT WITH PHOTO CARDS -->
+<section id="connect" style="padding:60px 20px; text-align:center;">
+  <h2 style="
+        font-size:clamp(26px,3.5vw,40px);
+        margin-bottom:20px;
+        font-weight:700;">
+    How We Connect
+  </h2>
+
+  <p style="
+        max-width:850px;
+        margin:0 auto 35px;
+        font-size:18px;
+        line-height:1.6;">
+    We connect with Aspirant, partners, and communities through consistent engagement,
+    support, and communication to make learning and growth easier for everyone.
+  </p>
+
+  <div style="
+        display:grid;
+        grid-template-columns:repeat(auto-fit, minmax(260px,1fr));
+        gap:30px;">
+    
+    <!-- CARD 1 -->
+    <div style="
+          background:rgba(255,255,255,0.25);
+          backdrop-filter:blur(12px);
+          padding:18px;
+          border-radius:14px;
+          box-shadow:0 8px 25px rgba(0,0,0,0.1);">
+      <img src="direct communication (1).jpeg" 
+           alt="Communication" 
+           style="
+              width:100%;
+              border-radius:12px;
+              margin-bottom:14px;">
+      <h3 style="font-size:20px; margin-bottom:10px;">📞 Direct Communication</h3>
+      <p>We stay connected through calls, WhatsApp updates, and personal guidance.</p>
+    </div>
+
+    <!-- CARD 2 -->
+    <div style="
+          background:rgba(255,255,255,0.25);
+          backdrop-filter:blur(12px);
+          padding:18px;
+          border-radius:14px;
+          box-shadow:0 8px 25px rgba(0,0,0,0.1);">
+      <img src="community engagement.jpeg" 
+           alt="Community" 
+           style="
+              width:100%;
+              border-radius:12px;
+              margin-bottom:14px;">
+      <h3 style="font-size:20px; margin-bottom:10px;">🤝 Community Engagement</h3>
+      <p>Regular workshops, events, and group activities keep us closely connected.</p>
+    </div>
+
+    <!-- CARD 3 -->
+    <div style="
+          background:rgba(255,255,255,0.25);
+          backdrop-filter:blur(12px);
+          padding:18px;
+          border-radius:14px;
+          box-shadow:0 8px 25px rgba(0,0,0,0.1);">
+      <img src="Stakeholder Engagemant.jpeg" 
+           alt="Social Media" 
+           style="
+              width:100%;
+              border-radius:12px;
+              margin-bottom:14px;">
+      <h3 style="font-size:20px; margin-bottom:10px;">💬 Stakeholder Engagement</h3>
+      <p>Connect With the Stakeholder for betterment of aspirant </p>
+    </div>
+
+    <!-- CARD 4 -->
+    <div style="
+          background:rgba(255,255,255,0.25);
+          backdrop-filter:blur(12px);
+          padding:18px;
+          border-radius:14px;
+          box-shadow:0 8px 25px rgba(0,0,0,0.1);">
+      <img src="student support.jpeg" 
+           alt="Student Support" 
+           style="
+              width:100%;
+              border-radius:12px;
+              margin-bottom:14px;">
+      <h3 style="font-size:20px; margin-bottom:10px;">🎓 Aspirant Support</h3>
+      <p>From learning to placement, we support aspirant at every step.</p>
+    </div>
+
+  </div>
+</section>
+
+    <!-- TEACHERS -->
+    <section id="teachers">
+      <h2>Our Team</h2>
+
+      <div class="teachers-wrapper">
+
+        <!-- Top 4 -->
+        <div class="teachers-row">
+          <div class="teacher-card"><img src="Teacher1.jpeg"><h3>Chanchal Chavan</h3><p>Center Manager</p></div>
+          <div class="teacher-card"><img src="Teacher2-2.jpeg"><h3>Smita Sonde</h3><p>Social Worker</p></div>
+          <div class="teacher-card"><img src="Teacher3.jpeg"><h3>Komal Borade</h3><p>Social Worker</p></div>
+          <div class="teacher-card"><img src="Teacher4.jpeg"><h3>Jyoti Shinde</h3><p>Graphic Designing  Facilitator</p></div>
+        </div>
+
+        <!-- Bottom 2 -->
+        <div class="teachers-row">
+          <div class="teacher-card"><img src="Teacher5.jpeg"><h3>Jayashri Dolas</h3><p>ITES Facilitator</p></div>
+          <div class="teacher-card"><img src="Teacher6.jpg"><h3>Amrapali Gangurde</h3><p>Technical Facilitator</p></div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- PARTNERS -->
+    <section id="partners">
+      <h2>Our Partner Companies</h2>
+      <ul style="list-style:none;display:flex;flex-wrap:wrap;gap:15px;justify-content:center;">
+        <li>WNS</li>
+        <li>Cognizant</li>
+        <li>Concentrix</li>
+        <li>Royal Solutions</li>
+        <li>PJ Tech</li>
+        <li>Cubics Solution</li>
+        <li>Bajaj Finance</li>
+      </ul>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <h2>Contact Us</h2>
+      <p>Email: info@brightfutureindia.org | Phone: +91 7767099291</p>
+    </section>
+
+  </main>
+
+<section class="newsletter" aria-labelledby="newsletter-heading">
+  <div class="container">
+    <h2 id="newsletter-heading">
+      Subscribe to our newsletter to get the latest news<br />
+      and updates right in your inbox.
+    </h2>
+
+    <form class="subscribe-panel" action="#" method="post" onsubmit="event.preventDefault(); alert('Subscribed (demo)')">
+      <div class="subscribe-left" role="group" aria-label="subscribe inputs">
+        <input type="text" name="name" placeholder="Your name" aria-label="Your name" required>
+        <input type="email" name="email" placeholder="Your email" aria-label="Your email" required>
+      </div>
+
+      <button type="submit" class="subscribe-btn" aria-label="Subscribe">Subscribe</button>
+    </form>
+  </div>
+</section>
+
+      
+  <footer>
+    <p>© 2025 Bright Future India NGO | All Rights Reserved</p>
+    <h3>Our Location - Yerwada, Pune</h3>
+    <iframe src="https://www.google.com/maps?q=Yerwada,+Pune&output=embed"></iframe>
+  </footer>
+
+  <a href="#top" class="back-to-top">↑</a>
+
+</body>
+
+</html>
